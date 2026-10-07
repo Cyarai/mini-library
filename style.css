@@ -1,0 +1,62 @@
+body {
+  background-color: #a9a9a9;
+}
+#new-book {
+  display: block;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: #00bfff;
+}
+#new-book:hover {
+  background-color: #1e90ff;
+}
+#library {
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  justify-content: center;
+  gap: 20px;
+}
+.book-card {
+  border: 2px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.5);
+  background-color: white;
+}
+
+.remove-button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: #00bfff;
+}
+
+.toggle-read {
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: #00bfff;
+}
+
+.toggle-read:hover {
+  background-color: #1e90ff;
+}
+
+.remove-button:hover {
+  background-color: #1e90ff;
+}
+h1 {
+  text-align: center;
+  font-size: 50px;
+}
