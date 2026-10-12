@@ -29,21 +29,17 @@ class Library {
   }
 }
 
-function addBookToLibrary(title, author, page, read) {
-  const newBook = new Book(title, author, page, read);
+const library = new Library();
 
-  myLibrary.push(newBook);
-}
-
-addBookToLibrary("Harry Potter", "J.K Rowling", 100, false);
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
+library.add("Harry Potter", "J.K Rowling", 100, false);
+library.add("The Hobbit", "J.R.R. Tolkien", 295, true);
+library.add("1984", "George Orwell", 328, false);
 
 const bookContainer = document.querySelector("#library");
 function displayBooks() {
   bookContainer.innerHTML = "";
 
-  myLibrary.forEach((book) => {
+  library.books.forEach((book) => {
     const card = document.createElement("div");
     card.classList.add("book-card");
     card.dataset.id = book.id;
@@ -60,8 +56,8 @@ function displayBooks() {
     const removeButton = card.querySelector(".remove-button");
 
     removeButton.addEventListener("click", () => {
-      const bookIndex = myLibrary.findIndex((b) => b.id === card.dataset.id);
-      myLibrary.splice(bookIndex, 1);
+      library.remove(card.dataset.id);
+
       displayBooks();
     });
 
@@ -99,7 +95,7 @@ bookForm.addEventListener("submit", (event) => {
 
   const read = document.querySelector("#read").checked;
 
-  addBookToLibrary(title, author, pages, read);
+  library.add(title, author, pages, read);
 
   displayBooks();
 
