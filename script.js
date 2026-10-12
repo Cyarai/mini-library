@@ -1,16 +1,18 @@
 const myLibrary = [];
 
-function Book(title, author, page, read) {
-  this.title = title;
-  this.author = author;
-  this.page = page;
-  this.read = read;
-  this.id = crypto.randomUUID();
-}
+class Book {
+  constructor(title, author, page, read) {
+    this.title = title;
+    this.author = author;
+    this.page = page;
+    this.read = read;
+    this.id = crypto.randomUUID();
+  }
 
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
+  toggleRead() {
+    this.read = !this.read;
+  }
+}
 
 function addBookToLibrary(title, author, page, read) {
   const newBook = new Book(title, author, page, read);
@@ -36,7 +38,7 @@ function displayBooks() {
     <p>Author: ${book.author}</p>
     <p>Pages: ${book.page}</p>
     <p>Status: ${book.read ? "Yes" : "No"}</p>
-    
+
     <button class="remove-button">Remove</button>
      <button class="toggle-read">Toggle Read</button>`;
 
