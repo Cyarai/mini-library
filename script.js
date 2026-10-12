@@ -43,10 +43,9 @@ function displayBooks() {
      <button class="toggle-read">Toggle Read</button>`;
 
     const removeButton = card.querySelector(".remove-button");
+
     removeButton.addEventListener("click", () => {
-      const bookIndex = myLibrary.findIndex(
-        (book) => book.id === card.dataset.set,
-      );
+      const bookIndex = myLibrary.findIndex((b) => b.id === card.dataset.id);
       myLibrary.splice(bookIndex, 1);
       displayBooks();
     });
