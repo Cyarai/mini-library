@@ -1,5 +1,3 @@
-const myLibrary = [];
-
 class Book {
   constructor(title, author, page, read) {
     this.title = title;
@@ -11,6 +9,23 @@ class Book {
 
   toggleRead() {
     this.read = !this.read;
+  }
+}
+
+class Library {
+  #books = [];
+
+  add(title, author, page, read) {
+    const book = new Book(title, author, page, read);
+    this.#books.push(book);
+  }
+
+  remove(id) {
+    this.#books = this.#books.filter((book) => book.id !== id);
+  }
+
+  get books() {
+    return [...this.#books];
   }
 }
 
