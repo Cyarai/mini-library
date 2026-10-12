@@ -1,32 +1,45 @@
-const myLibrary = [];
+class Book {
+  constructor(title, author, page, read) {
+    this.title = title;
+    this.author = author;
+    this.page = page;
+    this.read = read;
+    this.id = crypto.randomUUID();
+  }
 
-function Book(title, author, page, read) {
-  this.title = title;
-  this.author = author;
-  this.page = page;
-  this.read = read;
-  this.id = crypto.randomUUID();
+  toggleRead() {
+    this.read = !this.read;
+  }
 }
 
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
+class Library {
+  #books = [];
 
-function addBookToLibrary(title, author, page, read) {
-  const newBook = new Book(title, author, page, read);
+  add(title, author, page, read) {
+    const book = new Book(title, author, page, read);
+    this.#books.push(book);
+  }
 
-  myLibrary.push(newBook);
+  remove(id) {
+    this.#books = this.#books.filter((book) => book.id !== id);
+  }
+
+  get books() {
+    return [...this.#books];
+  }
 }
 
-addBookToLibrary("Harry Potter", "J.K Rowling", 100, false);
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
+const library = new Library();
+
+library.add("Harry Potter", "J.K Rowling", 100, false);
+library.add("The Hobbit", "J.R.R. Tolkien", 295, true);
+library.add("1984", "George Orwell", 328, false);
 
 const bookContainer = document.querySelector("#library");
 function displayBooks() {
   bookContainer.innerHTML = "";
 
-  myLibrary.forEach((book) => {
+  library.books.forEach((book) => {
     const card = document.createElement("div");
     card.classList.add("book-card");
     card.dataset.id = book.id;
@@ -36,16 +49,15 @@ function displayBooks() {
     <p>Author: ${book.author}</p>
     <p>Pages: ${book.page}</p>
     <p>Status: ${book.read ? "Yes" : "No"}</p>
-    
+
     <button class="remove-button">Remove</button>
      <button class="toggle-read">Toggle Read</button>`;
 
     const removeButton = card.querySelector(".remove-button");
+
     removeButton.addEventListener("click", () => {
-      const bookIndex = myLibrary.findIndex(
-        (book) => book.id === card.dataset.set,
-      );
-      myLibrary.splice(bookIndex, 1);
+      library.remove(card.dataset.id);
+
       displayBooks();
     });
 
@@ -83,7 +95,7 @@ bookForm.addEventListener("submit", (event) => {
 
   const read = document.querySelector("#read").checked;
 
-  addBookToLibrary(title, author, pages, read);
+  library.add(title, author, pages, read);
 
   displayBooks();
 
